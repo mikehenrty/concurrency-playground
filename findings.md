@@ -14,9 +14,13 @@ node js/serial.js MyS3BucketName ListOfS3Files.txt outputDir
 ## Serial
 
 * Node
-100 requests - `1.11s user 0.17s system 2% cpu 53.618 total`
+100 files - `1.11s user 0.17s system 2% cpu 53.618 total`
 1088k / 53.618s = `20.29 k/s`
 
 * Python
-100 requests - `2.49s user 0.12s system 7% cpu 33.700 total`
+100 files - `2.49s user 0.12s system 7% cpu 33.700 total`
 1099k / 33.700s = `32.28 k/s`
+
+* PHP
+100 files - `0.31s user 0.06s system 2% cpu 17.368 total`
+1099k / 17.368 = `63.28 k/s`

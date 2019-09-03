@@ -6,3 +6,5 @@ js/node_modules
 
 python/env
 python/__pycache__
+
+php/vendor
