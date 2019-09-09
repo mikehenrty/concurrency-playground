@@ -47,6 +47,7 @@ func main() {
 	check(err)
 
 	downloader := s3manager.NewDownloader(sess)
+	downloader.Concurrency = 1
 
 	files := load(input_file)
 	for _, filename := range files {
