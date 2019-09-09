@@ -24,3 +24,7 @@ node js/serial.js MyS3BucketName ListOfS3Files.txt outputDir
 * PHP
 100 files - `0.31s user 0.06s system 2% cpu 17.368 total`
 1099k / 17.368 = `63.28 k/s`
+
+* Go
+100 files - `0.15s user 0.07s system 1% cpu 17.585 total`
+1099k / 16.536 = `66.46 k/s`

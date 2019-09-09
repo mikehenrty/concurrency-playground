@@ -8,3 +8,5 @@ python/env
 python/__pycache__
 
 php/vendor
+
+go/concurrency-playground
