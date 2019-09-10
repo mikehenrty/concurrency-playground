@@ -1,19 +1,18 @@
-import os
-import sys
-import boto3
+from shared import get_params, read_filenames, download_file
 
-bucket_name = sys.argv[1]
-input_file = sys.argv[2]
-output_dir = sys.argv[3]
+params = get_params()
+bucket_name = params['bucket_name']
+input_file = params['input_file']
+output_dir = params['output_dir']
 
-session = boto3.Session()
-resource = session.resource('s3')
+lines = read_filenames(input_file)
 
-with open(input_file, 'r') as data:
-    lines = [line.strip() for line in data.readlines()]
 
-while(len(lines) > 0):
-    filename = lines.pop()
-    bucket = resource.Bucket(bucket_name)
-    output_filename = os.path.join('./', output_dir, filename)
-    bucket.download_file(filename, output_filename)
+def main():
+    while(len(lines) > 0):
+        filename = lines.pop()
+        download_file(bucket_name, filename, output_dir)
+
+
+if __name__ == '__main__':
+    main()

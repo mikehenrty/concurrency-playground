@@ -29,6 +29,7 @@ user 5.07
 sys 0.62
 
 * Python
+
 1000 files 12060kb / ~82.39 = 146.376 kb/s
 
 real 84.02
@@ -77,17 +78,23 @@ sys 0.16
 ## From home
 
 * Node
-Serial
+### Serial
 100 files - `1.11s user 0.17s system 2% cpu 53.618 total`
 1088k / 53.618s = `20.29 k/s`
 
-Concurrent
+### Concurrent
 1000 files - `2.57s user 0.38s system 44% cpu 6.711 total`
 12064k / 6.711s = `1797.65 k/s`
 
 * Python
+### Serial
 100 files - `2.49s user 0.12s system 7% cpu 33.700 total`
 1099k / 33.700s = `32.28 k/s`
+
+### Concurrent
+1000 files - `16.62s user 4.44s system 163% cpu 12.915 total`
+12064k / 12.915 = `934.11 k/s`
+
 
 * PHP
 100 files - `0.31s user 0.06s system 2% cpu 17.368 total`
