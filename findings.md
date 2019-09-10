@@ -74,11 +74,16 @@ user 0.68
 sys 0.16
 
 
-## Serial from home
+## From home
 
 * Node
+Serial
 100 files - `1.11s user 0.17s system 2% cpu 53.618 total`
 1088k / 53.618s = `20.29 k/s`
+
+Concurrent
+1000 files - `2.57s user 0.38s system 44% cpu 6.711 total`
+12064k / 6.711s = `1797.65 k/s`
 
 * Python
 100 files - `2.49s user 0.12s system 7% cpu 33.700 total`
