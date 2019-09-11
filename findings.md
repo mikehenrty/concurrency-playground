@@ -97,8 +97,13 @@ sys 0.16
 
 
 * PHP
+### Serial
 100 files - `0.31s user 0.06s system 2% cpu 17.368 total`
 1099k / 17.368 = `63.28 k/s`
+
+### Concurrent
+1000 files = `1.51s user 0.50s system 43% cpu 4.593 total`
+12064k / 4.593 = `2626.61 k/s`
 
 * Go
 100 files - `0.15s user 0.07s system 1% cpu 17.585 total`
