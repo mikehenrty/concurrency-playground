@@ -106,5 +106,10 @@ sys 0.16
 12064k / 4.593 = `2626.61 k/s`
 
 * Go
+### Serial
 100 files - `0.15s user 0.07s system 1% cpu 17.585 total`
 1099k / 16.536 = `66.46 k/s`
+
+### Concurrent
+1000 files - `0.71s user 0.28s system 19% cpu 5.143 total`
+12064k / 5.143 = `2345.71 k/s`
