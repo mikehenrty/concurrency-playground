@@ -11,6 +11,13 @@ Generally code is run from the root project directory like this:
 node js/serial.js MyS3BucketName ListOfS3Files.txt outputDir
 ```
 
+## Concurrent from SageMaker Notebook instance
+lanugage,real,user,system,cpu
+js,11.05,9.98,1.91,107.64
+python,123.71,133.03,9.50,115.21
+php,9.62,8.15,1.26,97.87
+go,5.62,6.71,1.97,154.35
+
 ## Serial from SageMaker Notebook instance
 
 * Node
