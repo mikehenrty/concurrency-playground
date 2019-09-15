@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" = "serial" ]; then
+  php ./serial.php $2 $3 $4
+elif [ "$1" = "concurr" ]; then
+  php ./concurr.php $2 $3 $4
+else
+  echo "1st param must be either 'serial' or 'concur'., got '$1'"
+  exit
+fi

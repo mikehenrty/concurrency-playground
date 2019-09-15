@@ -9,4 +9,5 @@ python/__pycache__
 
 php/vendor
 
-go/concurrency-playground
+go/serial
+go/concurr

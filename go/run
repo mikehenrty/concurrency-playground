@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" = "serial" ]; then
+  go build serial.go && ./serial $2 $3 $4
+elif [ "$1" = "concurr" ]; then
+  go build concurr.go && ./concurr $2 $3 $4
+else
+  echo "1st param must be either 'serial' or 'concur'., got '$1'"
+  exit
+fi
