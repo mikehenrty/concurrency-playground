@@ -1,14 +1,13 @@
-filenames.txt
 input
 output
 
-js/node_modules
+src/js/node_modules
 
-python/env
-python/__pycache__
+src/python/env
+src/python/__pycache__
 
-php/vendor
-php/composer.phar
+src/php/vendor
+src/php/composer.phar
 
-go/serial
-go/concurr
+src/go/serial
+src/go/concurr
