@@ -8,8 +8,10 @@ Each language will have up to 3 entry points, one for serialized s3/filesystem a
 
 Generally code is run from the root project directory like this:
 ```bash
-node js/serial.js MyS3BucketName ListOfS3Files.txt outputDir
+js/run serial MyS3BucketName ListOfS3Files.txt outputDir
+go/run concurr MyS3BucketName ListOfS3Files.txt outputDir
 ```
+Notice we use either `serial` or `concurr` as the fisrt argument, to specify which download approach.
 
 ## Concurrent from SageMaker Notebook instance
 lanugage,real,user,system,cpu
