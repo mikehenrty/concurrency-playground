@@ -8,7 +8,7 @@ monkey.patch_all()
 from shared import get_params, read_filenames, download_file
 
 
-NUM_WORKERS = 40
+NUM_WORKERS = 10
 
 params = get_params()
 bucket_name = params['bucket_name']
