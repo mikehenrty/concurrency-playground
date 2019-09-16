@@ -22,7 +22,7 @@ go,5.62,6.71,1.97,154.35
 
 ## Serial from SageMaker Notebook instance
 
-* Node
+# Node
 1000 files 12060kb / ~45.33 = 244.03 kb/s
 
 real 49.95
@@ -37,7 +37,7 @@ real 41.90
 user 5.07
 sys 0.62
 
-* Python
+# Python
 
 1000 files 12060kb / ~82.39 = 146.376 kb/s
 
@@ -53,7 +53,7 @@ real 81.11
 user 14.81
 sys 1.51
 
-* PHP
+# PHP
 1000 files 12060kb / ~38.21s = 315.624 kb/s
 
 real    0m36.113s
@@ -68,7 +68,7 @@ real    0m35.864s
 user    0m1.145s
 sys     0m0.282s
 
-* Go
+# Go
 1000 files 12060kb / ~39.04s = 308.91 kb/s
 
 real    0m45.753s
@@ -86,7 +86,7 @@ sys 0.16
 
 ## From home
 
-* Node
+# Node
 ### Serial
 100 files - `1.11s user 0.17s system 2% cpu 53.618 total`
 1088k / 53.618s = `20.29 k/s`
@@ -95,7 +95,7 @@ sys 0.16
 1000 files - `2.57s user 0.38s system 44% cpu 6.711 total`
 12064k / 6.711s = `1797.65 k/s`
 
-* Python
+# Python
 ### Serial
 100 files - `2.49s user 0.12s system 7% cpu 33.700 total`
 1099k / 33.700s = `32.28 k/s`
@@ -105,7 +105,7 @@ sys 0.16
 12064k / 12.915 = `934.11 k/s`
 
 
-* PHP
+# PHP
 ### Serial
 100 files - `0.31s user 0.06s system 2% cpu 17.368 total`
 1099k / 17.368 = `63.28 k/s`
@@ -114,7 +114,7 @@ sys 0.16
 1000 files = `1.51s user 0.50s system 43% cpu 4.593 total`
 12064k / 4.593 = `2626.61 k/s`
 
-* Go
+# Go
 ### Serial
 100 files - `0.15s user 0.07s system 1% cpu 17.585 total`
 1099k / 16.536 = `66.46 k/s`
