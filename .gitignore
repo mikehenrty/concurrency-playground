@@ -8,6 +8,7 @@ python/env
 python/__pycache__
 
 php/vendor
+php/composer.phar
 
 go/serial
 go/concurr
