@@ -4,9 +4,12 @@
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" >/dev/null 2>&1 && pwd )"
 . $CURRENT_DIR/definitions
 
+INPUT_FILE="`realpath $2`"
+OUTPUT_FOLDER="`realpath $3`"
+
 # Output timing values in csv format.
 printf "lanugage,real,user,system,cpu\n"
 TIMEFORMAT='%2R,%2U,%2S,%P'
 for i in "${LANGUAGES[@]}"; do
-  cd $ROOT_DIR/$i && printf "$i," && time ./run concurr $1 $2 $3
+  cd $ROOT_DIR/$i && printf "$i," && time ./run concurr $1 $INPUT_FILE $OUTPUT_FOLDER
 done
