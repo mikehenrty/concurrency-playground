@@ -1,8 +1,9 @@
 #!/bin/bash
 
-LANGUAGES=( 'js' 'python' 'php' 'go' )
 
-ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" >/dev/null 2>&1 && pwd )"
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" >/dev/null 2>&1 && pwd )"
+. $CURRENT_DIR/definitions
+
 INPUT_FILE="$ROOT_DIR/$2"
 OUTPUT_FOLDER="$ROOT_DIR/$3"
 
