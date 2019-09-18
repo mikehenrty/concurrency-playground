@@ -11,6 +11,7 @@ def get_params():
         'bucket_name': sys.argv[1],
         'input_file': sys.argv[2],
         'output_dir': sys.argv[3],
+        'workers': sys.argv[4],
     }
 
 

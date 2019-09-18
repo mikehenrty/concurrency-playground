@@ -14,6 +14,7 @@ params = get_params()
 bucket_name = params['bucket_name']
 input_file = params['input_file']
 output_dir = params['output_dir']
+num_workers = int(params['workers']) if params['workers'] else NUM_WORKERS
 
 files = read_filenames(input_file)
 
@@ -26,12 +27,11 @@ def worker():
 
 def main():
     workers = []
-    for i in range(0, NUM_WORKERS):
+    for i in range(0, num_workers):
         w = gevent.spawn(worker)
         workers.append(w)
 
     gevent.wait(workers)
-    # gevent.joinall(workers)
 
 
 if __name__ == '__main__':
