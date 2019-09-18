@@ -1,0 +1,34 @@
+#!/bin/bash
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" >/dev/null 2>&1 && pwd )"
+. $CURRENT_DIR/definitions
+
+INPUT_FILE="`realpath $3`"
+OUTPUT_FOLDER="`realpath $4`"
+
+declare -a languages=()
+if [ "$1" = "all" ]; then
+  languages=$LANGUAGES
+else
+  declare -A map
+  for key in "${!LANGUAGES[@]}"; do
+    map[${LANGUAGES[$key]}]="$key"
+  done  # see below
+
+  if [[ -n "${map[$1]}" ]]; then
+    languages=($1)
+  else
+    printf "Unrecognized language parameter :: $1\n"
+    exit
+  fi
+fi
+
+for l in $languages; do
+  printf "language,num_workers,duration\n"
+  TIMEFORMAT='%2R'
+  cd "$SRC_DIR/$l"
+  for i in {1..100}; do
+    DURATION="$( { time ./run concurr $2 $INPUT_FILE $OUTPUT_FOLDER $i; } 2>&1 )"
+    printf "$l,$i,$DURATION\n"
+  done
+done

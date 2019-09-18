@@ -4,7 +4,7 @@ const shared = require('./shared');
 
 const NUM_WORKERS = 100;
 
-const { bucket, inputFile, output } = shared.getCLIParameters();
+const { bucket, inputFile, output, workers } = shared.getCLIParameters();
 const filenames = shared.readFilenames(inputFile);
 
 async function worker() {
@@ -16,7 +16,8 @@ async function worker() {
 }
 
 function fetchAllConcurr(filenames) {
-  for (let i = 0; i < NUM_WORKERS; i++) {
+  const count = workers || NUM_WORKERS;
+  for (let i = 0; i < count; i++) {
     worker();
   }
 }

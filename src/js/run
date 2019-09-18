@@ -3,7 +3,7 @@
 if [ "$1" = "serial" ]; then
   node ./serial.js $2 $3 $4
 elif [ "$1" = "concurr" ]; then
-  node ./concurr.js $2 $3 $4
+  node ./concurr.js $2 $3 $4 $5 # 5th param is number of workers.
 else
   echo "1st param must be either 'serial' or 'concurr'., got '$1'"
   exit

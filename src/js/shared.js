@@ -9,6 +9,7 @@ module.exports = {
       bucket: process.argv[2],
       inputFile: process.argv[3],
       output: process.argv[4],
+      workers: process.argv[5],
     };
   },
 
