@@ -27,7 +27,7 @@ for l in $languages; do
   printf "language,num_workers,duration\n"
   TIMEFORMAT='%2R'
   cd "$SRC_DIR/$l"
-  for i in {1..100}; do
+  for i in {3..100}; do
     DURATION="$( { time ./run concurr $2 $INPUT_FILE $OUTPUT_FOLDER $i; } 2>&1 )"
     printf "$l,$i,$DURATION\n"
   done
