@@ -4,6 +4,7 @@ import (
 	"os"
 	"path/filepath"
 	"sync"
+	"strconv"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -43,6 +44,16 @@ func worker(downloader *s3manager.Downloader, wg *sync.WaitGroup) {
 	wg.Done()
 }
 
+func getNumWorkers() int {
+	if len(os.Args) > 4 {
+		numWorkers, err := strconv.Atoi(os.Args[4])
+		shared.Check(err)
+		return numWorkers
+	}
+
+	return NUM_WORKERS
+}
+
 func main() {
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String("us-east-1")},
@@ -55,7 +66,7 @@ func main() {
 	files = shared.Load(input_file)
 
 	var wg sync.WaitGroup
-	for i := 1; i < NUM_WORKERS; i++ {
+	for i := 1; i < getNumWorkers(); i++ {
 		wg.Add(1)
 		go worker(downloader, &wg)
 	}
