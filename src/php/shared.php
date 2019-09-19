@@ -14,7 +14,8 @@ function getParams() {
   return [
     'bucket' => $argv[1],
     'inputFile' => $argv[2],
-    'outputDir' => $argv[3]
+    'outputDir' => $argv[3],
+    'workers' => $argv[4]
   ];
 }
 

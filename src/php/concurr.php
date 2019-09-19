@@ -9,7 +9,8 @@ const NUM_WORKERS = 60;
 [
   'bucket' => $bucket,
   'inputFile' => $inputFile,
-  'outputDir' => $outputDir
+  'outputDir' => $outputDir,
+  'workers' => $numWorkers
 ] = getParams();
 
 $files = readFilenams($inputFile);
@@ -30,7 +31,7 @@ function worker() {
 }
 
 $workers = [];
-for ($i = 0; $i < NUM_WORKERS; $i++) {
+for ($i = 0; $i < $numWorkers ?? NUM_WORKERS; $i++) {
   array_push($workers, worker());
 }
 
