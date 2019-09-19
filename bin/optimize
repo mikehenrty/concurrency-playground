@@ -6,29 +6,24 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" >/dev/null 2>&1 && pwd )"
 INPUT_FILE="`realpath $3`"
 OUTPUT_FOLDER="`realpath $4`"
 
-declare -a languages=()
-if [ "$1" = "all" ]; then
-  languages=$LANGUAGES
-else
-  declare -A map
-  for key in "${!LANGUAGES[@]}"; do
-    map[${LANGUAGES[$key]}]="$key"
-  done  # see below
+# Use language map to see if cli arg 1 was valid language.
+declare -A map
+for key in "${!LANGUAGES[@]}"; do
+  map[${LANGUAGES[$key]}]="$key"
+done
 
-  if [[ -n "${map[$1]}" ]]; then
-    languages=($1)
-  else
-    printf "Unrecognized language parameter :: $1\n"
-    exit
-  fi
+# Sanity check to validate language.
+if [[ -z "${map[$1]}" ]]; then
+  printf "Unrecognized language parameter :: $1\n"
+  exit
 fi
 
-for l in $languages; do
-  printf "language,num_workers,duration\n"
-  TIMEFORMAT='%2R'
-  cd "$SRC_DIR/$l"
-  for i in {3..100}; do
-    DURATION="$( { time ./run concurr $2 $INPUT_FILE $OUTPUT_FOLDER $i; } 2>&1 )"
-    printf "$l,$i,$DURATION\n"
-  done
+cd "$SRC_DIR/$1"
+
+# printf "language,num_workers,real,user,system,cpu\n"
+TIMEFORMAT='%2R,%2U,%2S,%P'
+for i in {1..20}; do
+  j=$((5 * $i))
+  TIME_RESULTS="$( { time ./run concurr $2 $INPUT_FILE $OUTPUT_FOLDER $j; } 2>&1 )"
+  printf "$1,$j,$TIME_RESULTS\n"
 done

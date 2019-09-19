@@ -1,0 +1,9 @@
+#!/bin/bash
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" >/dev/null 2>&1 && pwd )"
+. $CURRENT_DIR/definitions
+
+printf "language,num_workers,real,user,system,cpu\n"
+for lan in "${LANGUAGES[@]}"; do
+  $CURRENT_DIR/optimize $lan $1 $2 $3
+done
