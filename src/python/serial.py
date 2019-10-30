@@ -1,17 +1,18 @@
-from shared import get_params, read_filenames, download_file
+from shared import shared
 
-params = get_params()
+params = shared.get_params()
 bucket_name = params['bucket_name']
 input_file = params['input_file']
 output_dir = params['output_dir']
 
-lines = read_filenames(input_file)
+lines = shared.read_filenames(input_file)
 
 
 def main():
-    while(len(lines) > 0):
+    while len(lines) > 0:
         filename = lines.pop()
-        download_file(bucket_name, filename, output_dir)
+        print(filename)
+        shared.download_file(bucket_name, filename, output_dir)
 
 
 if __name__ == '__main__':

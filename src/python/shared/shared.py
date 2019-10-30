@@ -7,12 +7,16 @@ resource = session.resource('s3')
 
 
 def get_params():
-    return {
+    params = {
         'bucket_name': sys.argv[1],
         'input_file': sys.argv[2],
         'output_dir': sys.argv[3],
-        'workers': sys.argv[4],
     }
+
+    if len(sys.argv) > 4:
+        params['workers'] = sys.argv[4]
+
+    return params
 
 
 def read_filenames(input_file):

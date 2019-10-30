@@ -1,15 +1,15 @@
 import queue
 import threading
-from shared import get_params, read_filenames, download_file
+from shared import shared
 
 NUM_WORKERS = 300
 
-params = get_params()
+params = shared.get_params()
 bucket_name = params['bucket_name']
 input_file = params['input_file']
 output_dir = params['output_dir']
 
-lines = read_filenames(input_file)
+lines = shared.read_filenames(input_file)
 
 q = queue.Queue()
 
@@ -17,7 +17,7 @@ q = queue.Queue()
 def worker():
     while True:
         filename = q.get()
-        download_file(bucket_name, filename, output_dir)
+        shared.download_file(bucket_name, filename, output_dir)
         q.task_done()
 
 
