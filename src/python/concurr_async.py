@@ -1,6 +1,7 @@
 import os
 import asyncio
 import boto3
+import concurrent.futures
 from shared import shared
 
 
@@ -11,6 +12,7 @@ bucket_name = params['bucket_name']
 input_file = params['input_file']
 output_dir = params['output_dir']
 num_workers = int(params['workers']) if params['workers'] else NUM_WORKERS
+num_threads = max(num_workers, min(32, os.cpu_count() + 4))
 
 
 def downloader(bucket, key):
@@ -21,7 +23,7 @@ def downloader(bucket, key):
     return
 
 
-async def worker(queue):
+async def worker(queue, executor):
     """ Worker """
     # Create boto3 objects in each worker
     session = boto3.Session()
@@ -34,13 +36,13 @@ async def worker(queue):
         print(item)
 
         # Download file in the default executor (None = ThreadPoolExecutor)
-        await loop.run_in_executor(None, downloader, bucket, item)
+        await loop.run_in_executor(executor, downloader, bucket, item)
 
         # Decrement the item counter of the queue
         queue.task_done()
 
 
-async def main(loop):
+async def main(loop, executor):
     """ Main """
     # Read target files and put them into queue
     queue = asyncio.Queue(loop=loop)
@@ -50,7 +52,7 @@ async def main(loop):
 
     # Start workers
     for i in range(0, num_workers):
-        asyncio.ensure_future(worker(queue))
+        asyncio.ensure_future(worker(queue, executor))
 
     # Wait until all items in the queue are processed
     await queue.join()
@@ -61,6 +63,7 @@ async def main(loop):
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
 
-    loop.run_until_complete(main(loop))
+    with concurrent.futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
+        loop.run_until_complete(main(loop, executor))
 
     loop.close()
