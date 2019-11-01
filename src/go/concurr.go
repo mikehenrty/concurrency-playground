@@ -29,7 +29,6 @@ func worker(downloader *s3manager.Downloader) {
 	for filename := range files {
 		outfile, err := os.Create(filepath.Join(output_dir, filename))
 		shared.Check(err)
-		defer outfile.Close()
 
 		_, err = downloader.Download(outfile, &s3.GetObjectInput{
 				Bucket: aws.String(bucket),
@@ -37,6 +36,7 @@ func worker(downloader *s3manager.Downloader) {
 			})
 
 		shared.Check(err)
+		outfile.Close()
 	}
 }
 
