@@ -1,3 +1,5 @@
+// +build !serial
+
 package main
 
 import (
@@ -21,14 +23,10 @@ var	bucket = os.Args[1]
 var	input_file = os.Args[2]
 var	output_dir = os.Args[3]
 
-var files []string
+var files chan string
 
-func worker(downloader *s3manager.Downloader, wg *sync.WaitGroup) {
-	var filename string
-	for len(files) != 0 {
-		// Pop from the front, (or shift)
-		filename, files = files[0], files[1:]
-
+func worker(downloader *s3manager.Downloader) {
+	for filename := range files {
 		outfile, err := os.Create(filepath.Join(output_dir, filename))
 		shared.Check(err)
 
@@ -37,11 +35,9 @@ func worker(downloader *s3manager.Downloader, wg *sync.WaitGroup) {
 				Key:    aws.String(filename),
 			})
 
-		outfile.Close()
 		shared.Check(err)
+		outfile.Close()
 	}
-
-	wg.Done()
 }
 
 func getNumWorkers() int {
@@ -63,12 +59,27 @@ func main() {
 	downloader := s3manager.NewDownloader(sess)
 	downloader.Concurrency = SINGLE_FILE_CONCURRENCY
 
-	files = shared.Load(input_file)
+	//create a channel to hold up to our number of workers files
+	files = make(chan string, getNumWorkers())
 
 	var wg sync.WaitGroup
+	fileString := shared.Load(input_file)
+	wg.Add(1)
+	//fill the channel
+	go func(){
+		defer wg.Done()
+		defer close(files)
+		for _, f := range fileString {
+			files <- f
+		}
+	}()
+
 	for i := 1; i < getNumWorkers(); i++ {
 		wg.Add(1)
-		go worker(downloader, &wg)
+		go func() {
+			defer wg.Done()
+			worker(downloader)
+		}()
 	}
 
 	wg.Wait()
