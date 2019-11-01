@@ -12,7 +12,6 @@ bucket_name = params['bucket_name']
 input_file = params['input_file']
 output_dir = params['output_dir']
 num_workers = int(params['workers']) if params['workers'] else NUM_WORKERS
-print(num_workers)
 num_threads = max(num_workers, min(32, os.cpu_count() + 4))  # min(32, os.cpu_count() + 4) is the default
 
 
