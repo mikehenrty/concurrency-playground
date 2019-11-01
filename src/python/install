@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -f ./env ]; then
-  virtualenv -p "`which python3`" --no-site-packages env
+  virtualenv -p python3 --no-site-packages env
 fi
 . ./env/bin/activate
 pip install -r requirements.txt
