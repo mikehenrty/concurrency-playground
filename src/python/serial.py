@@ -11,7 +11,6 @@ lines = shared.read_filenames(input_file)
 def main():
     while len(lines) > 0:
         filename = lines.pop()
-        print(filename)
         shared.download_file(bucket_name, filename, output_dir)
 
 
